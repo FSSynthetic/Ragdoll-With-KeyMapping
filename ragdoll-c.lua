@@ -1,8 +1,8 @@
------------------------------------
--- Toogle Ragdoll, Made by JAF ----
---------- ReConfigured by ---------
----- FSSynthetic & Campinchris ----
------------------------------------
+--------------------------------------
+-- Toogle Ragdoll, Made by callmejaf--
+---------- ReConfigured by -----------
+----- FSSynthetic & Campinchris ------
+--------------------------------------
 
 ---------------------------------------------------
 --Local Variables
@@ -11,7 +11,7 @@ local ragdoll = false
 ragdol = true
 
 ---------------------------------------------------
---Key Mapping Register Shit
+--KeyMapping Register
 ---------------------------------------------------
 RegisterCommand('rdoll', function()
     TriggerEvent("Ragdoll", source)
@@ -21,7 +21,7 @@ TriggerEvent( "chat:addSuggestion", "/rdoll", "Puts you in ragdoll until you cli
 RegisterKeyMapping('rdoll', 'Toggle Ragdoll', 'keyboard', 'x') -- ('(Chat Command)', '(Keybind Menu Description)', '(Input Device)', '(Default Keymap)')
 
 ---------------------------------------------------
---Client Shit
+--Client Script
 ---------------------------------------------------
 Citizen.CreateThread(function()
     while true do
