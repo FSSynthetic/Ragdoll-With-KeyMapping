@@ -1,2 +1,2 @@
 # Ragdoll-With-KeyMapping
-This is a FiveM ragdoll script made by callmejaf, then re-configured by Campinchris and FSSynthetic. This script will allow the player to choose their own ragdoll key-bind for keyboard by using the RegisterKeyMapping native.
+This is a FiveM ragdoll script that allows you to set a custom keybind of your choice to enable and disable your players ragdoll. This is done using the RegisterKeyMapping native.
