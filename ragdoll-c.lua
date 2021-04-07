@@ -1,37 +1,37 @@
---------------------------------------
--- Toogle Ragdoll, Made by callmejaf--
----------- ReConfigured by -----------
------ FSSynthetic & Campinchris ------
---------------------------------------
-
----------------------------------------------------
---Local Variables
----------------------------------------------------
-local ragdoll = false
+---------------------------------
+--Local and global variables
+---------------------------------
+local Ragdoll = false
 ragdol = true
 
----------------------------------------------------
+---------------------------------
 --KeyMapping Register
----------------------------------------------------
+---------------------------------
 RegisterCommand('rdoll', function()
-    TriggerEvent("Ragdoll", source)
+  TriggerEvent("Ragdoll", source)
 end, false)
-TriggerEvent( "chat:addSuggestion", "/rdoll", "Puts you in ragdoll until you click a key of your choice to set as the permanent ragdoll key. (Can be changed later in Setting/Key Bindings/FiveM)" )
+TriggerEvent( "chat:addSuggestion", "/rdoll", "Puts you in ragdoll until you click a key of your choice to set as the ragdoll key. Press said key to toggle ragdoll on and off. (Can be changed later in Setting/Key Bindings/FiveM)" )
 
 RegisterKeyMapping('rdoll', 'Toggle Ragdoll', 'keyboard', 'x') -- ('(Chat Command)', '(Keybind Menu Description)', '(Input Device)', '(Default Keymap)')
 
----------------------------------------------------
---Client Script
----------------------------------------------------
+---------------------------------
+--Ragdoll Toggle
+---------------------------------
 Citizen.CreateThread(function()
-    while true do
-    Citizen.Wait(0)
-        if ragdoll then
-          SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
+    while true do 
+        Citizen.Wait(0)
+
+        vehCheck() -- Stops player from ragdolling while in any vehicle. Comment out if you'd like them to have the ability to ragdoll inside a vehicle. (Doesn't really do anything in a vehicle anyways)
+                 
+        if Ragdoll then
+            SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
+            if ragdol then
+                Ragdoll = false
+            end
         end
     end
 end)
-    
+
 RegisterNetEvent("Ragdoll")
 AddEventHandler("Ragdoll", function()
     if (ragdol) then
@@ -43,9 +43,25 @@ AddEventHandler("Ragdoll", function()
     end
 end)
 
----------------------------------------------------
+
+---------------------------------
 --Functions
----------------------------------------------------
+---------------------------------
 function setRagdoll(rag)
-    ragdoll = rag
+  Ragdoll = rag
+end
+
+function vehCheck()
+    if Ragdoll then
+        if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+            Ragdoll = false
+            notify("~r~You can't ragdoll while in a vehicle!")
+        end
+    end
+end
+
+function notify(text)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawNotification(true, true)
 end
