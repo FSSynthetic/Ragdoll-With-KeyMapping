@@ -7,12 +7,8 @@ ragdol = true
 ---------------------------------
 --KeyMapping Register
 ---------------------------------
-RegisterCommand('rdoll', function()
-  TriggerEvent("Ragdoll", source)
-end, false)
-TriggerEvent( "chat:addSuggestion", "/rdoll", "Puts you in ragdoll until you click a key of your choice to set as the ragdoll key. Press said key to toggle ragdoll on and off. (Can be changed later in Setting/Key Bindings/FiveM)" )
-
-RegisterKeyMapping('rdoll', 'Toggle Ragdoll', 'keyboard', 'x') -- ('(Chat Command)', '(Keybind Menu Description)', '(Input Device)', '(Default Keymap)')
+RegisterKeyMapping('rdoll', 'Toggle Ragdoll', 'keyboard', 'z') -- ('(Chat Command)', '(Keybind Menu Description)', '(Input Device)', '(Default Keymap)')
+-- This essentially allows the player to set their own keybind to the ragdoll. If the player wishes to not have any keybind ragdoll, they simply select the ragdoll keybind in the keybind menu and press delete.
 
 ---------------------------------
 --Ragdoll Toggle
@@ -22,7 +18,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
 
         vehCheck() -- Stops player from ragdolling while in any vehicle. Comment out if you'd like them to have the ability to ragdoll inside a vehicle. (Doesn't really do anything in a vehicle anyways)
-                 
+
         if Ragdoll then
             SetPedToRagdoll(GetPlayerPed(-1), 1000, 1000, 0, 0, 0, 0)
             if ragdol then
@@ -31,6 +27,12 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+RegisterCommand('rdoll', function()
+    TriggerEvent("Ragdoll", source)
+  end, false)
+TriggerEvent( "chat:addSuggestion", "/rdoll", "Chat command for enabling and disabling ragdoll. (Can also add a keybind in Setting/Key Bindings/FiveM) Default keybind is z." )
+
 
 RegisterNetEvent("Ragdoll")
 AddEventHandler("Ragdoll", function()
@@ -42,7 +44,6 @@ AddEventHandler("Ragdoll", function()
         ragdol = true
     end
 end)
-
 
 ---------------------------------
 --Functions
